@@ -64,27 +64,22 @@ public class PhoneBookManager extends Exception{
 					
 			//덮어쓰기
 		if(set.add(store) == false){
-			System.out.println("덮어쓸까요? Y(y)/N(n)");
+			System.out.println("이미 저장된 데이터입니다.\n"
+					+ "덮어쓸까요? Y(y) / N(n)");
 			
 			String re = scan.nextLine();
 		
 			if(re.equals("Y")||re.equals("y"))
 			{	
-				Iterator itr = set.iterator();
-				while(itr.hasNext()) {
-					PhoneInfo saname = (PhoneInfo)itr.next();
-					
-					if(saname.name.equals(store.name))
-					{
-						set.remove(saname);
-						set.add(store);
-						System.out.println("====덮어쓰기 성공====");
-					
-					}
-					else {
-						System.out.println("====덮어쓰기 실패====");
-					
-					}
+			if(set.contains(store))
+				{
+					set.remove(store);
+					set.add(store);
+					System.out.println("====덮어쓰기 성공====");
+				}
+				else 
+				{
+					System.out.println("====덮어쓰기 실패====");
 				}
 			}
 			else if (re.equals("N")||re.equals("n")) {

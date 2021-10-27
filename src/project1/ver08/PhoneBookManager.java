@@ -1,9 +1,14 @@
 package project1.ver08;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.HashSet;
 import java.util.InputMismatchException;
 import java.util.Iterator;
 import java.util.Scanner;
+
 
 public class PhoneBookManager extends Exception{
 	
@@ -64,27 +69,22 @@ public class PhoneBookManager extends Exception{
 					
 			//덮어쓰기
 		if(set.add(store) == false){
-			System.out.println("덮어쓸까요? Y(y)/N(n)");
+			System.out.println("이미 저장된 데이터입니다.\n"
+					+ "덮어쓸까요? Y(y) / N(n)");
 			
 			String re = scan.nextLine();
 		
 			if(re.equals("Y")||re.equals("y"))
 			{	
-				Iterator itr = set.iterator();
-				while(itr.hasNext()) {
-					PhoneInfo saname = (PhoneInfo)itr.next();
-					
-					if(saname.name.equals(store.name))
-					{
-						set.remove(saname);
-						set.add(store);
-						System.out.println("====덮어쓰기 성공====");
-					
-					}
-					else {
-						System.out.println("====덮어쓰기 실패====");
-					
-					}
+			if(set.contains(store))
+				{
+					set.remove(store);
+					set.add(store);
+					System.out.println("====덮어쓰기 성공====");
+				}
+				else 
+				{
+					System.out.println("====덮어쓰기 실패====");
 				}
 			}
 			else if (re.equals("N")||re.equals("n")) {
@@ -150,4 +150,26 @@ public class PhoneBookManager extends Exception{
 		}
 		System.out.println("==전체정보가 출력되었습니다==");
 	}
+	
+	public void saveFriendInfo() {		
+		try {
+			//인스턴스를 파일에 저장하기 위해 출력스트림을 생성한다. 
+			ObjectOutputStream out =
+				new ObjectOutputStream(
+					new FileOutputStream("src/ex20io/PhoneBook.obj")
+				);
+			Iterator<PhoneInfo> itr = set.iterator();//객체생성
+			while(itr.hasNext()) {	
+				PhoneInfo info = itr.next();
+				out.writeObject(info);
+				
+			}
+			
+		}
+		catch (Exception e) {
+			System.out.println("친구 정보 직렬화시 예외발생");
+		}
+	}
+	
 }
+

@@ -3,10 +3,10 @@ package project1;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import project1.ver02.PhoneInfo;
-import project1.ver07.MenuItem;
-import project1.ver07.MenuSelectException;
-import project1.ver07.PhoneBookManager;
+import project1.ver08.PhoneInfo;
+import project1.ver08.MenuItem;
+import project1.ver08.MenuSelectException;
+import project1.ver08.PhoneBookManager;
 
 public class PhoneBookVer08 {
 
@@ -39,7 +39,12 @@ public class PhoneBookVer08 {
 					//System.out.println("전체정보출력");
 					manager.dataAllShow();
 					break;
-				case 5:
+					
+				case MenuItem.DATASAVE:
+					//System.out.println("전체정보출력");
+					manager.saveFriendInfo();
+					break;
+				case MenuItem.END:
 					System.out.println("프로그램을종료합니다.");
 					return;//main메서드의 종료이므로 프로그램 자체의 종료로 이어진다.
 				}
