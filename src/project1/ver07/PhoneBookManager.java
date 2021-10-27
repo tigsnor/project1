@@ -71,7 +71,7 @@ public class PhoneBookManager extends Exception{
 		
 			if(re.equals("Y")||re.equals("y"))
 			{	
-			if(set.contains(store))
+				if(set.contains(store))
 				{
 					set.remove(store);
 					set.add(store);
