@@ -66,11 +66,11 @@ public class PhoneBookManager{
 				{	
 					Iterator itr = set.iterator();
 					while(itr.hasNext()) {
-						PhoneInfo object = (PhoneInfo)itr.next();
+						PhoneInfo saname = (PhoneInfo)itr.next();
 						
-						if(object.name.equals(store.name))
+						if(saname.name.equals(store.name))
 						{
-							set.remove(object);
+							set.remove(saname);
 							set.add(store);
 							System.out.println("덮어쓰기 성공!");
 						}
