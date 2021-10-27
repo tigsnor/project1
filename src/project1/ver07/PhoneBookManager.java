@@ -74,13 +74,16 @@ public class PhoneBookManager{
 							set.add(store);
 							System.out.println("덮어쓰기 성공!");
 						}
-						else if (re.equals("N")||re.equals("n")) {
-							System.out.println("덮어쓰기를 취소합니다.");
-						}
 						else {
-							System.out.println("잘못입력하셨습니다.");
+							System.out.println("덮어쓰기 실패!");
 						}
 					}
+				}
+				else if (re.equals("N")||re.equals("n")) {
+					System.out.println("덮어쓰기를 취소합니다.");
+				}
+				else {
+					System.out.println("잘못입력하셨습니다.");
 				}
 			}
 		}
