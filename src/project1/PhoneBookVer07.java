@@ -15,18 +15,15 @@ public class PhoneBookVer07 {
 		//초기값으로 100명의 정보를 저장할수 있는 Friend타입의 객체배열 생성
 		//무한루프 조건으로 특정 입력에만 종료할수 있는 구조를 만들어준다.
 		PhoneBookManager manager = new PhoneBookManager();
-		while(true) {
-			MenuItem.printMenu();
+		while(true) 
+		{			
 			try 
 			{	
-			Scanner scan = new Scanner(System.in);
-			int choice = scan.nextInt();
-			if(choice>5 || choice<1) {
-				MenuSelectException ex = new MenuSelectException();
-				throw ex;
-			}
-			
-				switch(choice) 
+				Scanner scan = new Scanner(System.in);
+				MenuItem.printMenu();
+				int select = scan.nextInt();
+				scan.nextLine();
+				switch(select) 
 				{
 				case MenuItem.DATAINPUT:
 					manager.dataInput();
@@ -46,13 +43,22 @@ public class PhoneBookVer07 {
 					System.out.println("프로그램을종료합니다.");
 					return;//main메서드의 종료이므로 프로그램 자체의 종료로 이어진다.
 				}
-			}
-			catch(InputMismatchException e) {
-					System.out.println("숫자를 입력하시오.");
-			}			
-			catch(Exception e) {
 				
+				if(select>5 || select<1) 
+				{
+					MenuSelectException ex = new MenuSelectException();
+					throw ex;
+				}
 			}
-		}////while끝
+			catch(InputMismatchException e)
+			{
+				System.out.println("숫자를 입력하시오");
+			}
+			catch(Exception e) 
+			{
+				System.out.println("오류발생");	
+			}			
+		}
+
 	}
 }

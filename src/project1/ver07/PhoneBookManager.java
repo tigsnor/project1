@@ -5,90 +5,94 @@ import java.util.InputMismatchException;
 import java.util.Iterator;
 import java.util.Scanner;
 
-
-
-
-
-
-public class PhoneBookManager{
+public class PhoneBookManager extends Exception{
 	
 	
 	HashSet<PhoneInfo> set = new HashSet<PhoneInfo>();
 	Scanner scan = new Scanner(System.in);
 	
-
 	
 	public void dataInput() { //데이터 입력
-		PhoneInfo store = null;//true false 확인용
-		String name, phoneNumber, major, companyName;
-		int grade;
-		//기본정보 입력(연락처의 공통사항)
-
-		System.out.println("데이터입력을 시작합니다.");
-		SubMenuItem.showSubMenu();
-		try {
-			
 		
-			int choice=scan.nextInt();
-			scan.nextLine();
-			//데이터 입력
-			if(choice==SubMenuItem.NORMAL) {	//일반 입력 후 추가
-				System.out.print("이름:");name = scan.nextLine();
-				System.out.print("전화번호:");phoneNumber = scan.nextLine();
-				store=new PhoneInfo(name,phoneNumber);
-				System.out.println("======입력완료=======");
-			}
-			else if(choice==SubMenuItem.SCHOOL) { //동창 입력 후 추가
-				System.out.print("이름:");name = scan.nextLine();
-				System.out.print("전화번호:");phoneNumber = scan.nextLine();
-				System.out.print("전공:"); major = scan.nextLine();
-				System.out.print("학년:"); grade = scan.nextInt();
-				PhoneSchoolInfo storeSc=new PhoneSchoolInfo(name, phoneNumber, major, grade);
-				store=storeSc;
-				System.out.println("======입력완료=======");
-				
-			}
-			else if(choice==SubMenuItem.COMPANY) { //직장인 입력 후 추가
-				System.out.print("이름:");name = scan.nextLine();
-				System.out.print("전화번호:");phoneNumber = scan.nextLine();
-				System.out.print("회사:"); companyName = scan.nextLine();
-				PhoneCompanyInfo storeCo=new PhoneCompanyInfo(name, phoneNumber, companyName);
-				store=storeCo;
-				System.out.println("======입력완료=======");
-			}	
+		int choice=0;
+		
+		System.out.println("데이터입력을 시작합니다.");
+		SubMenuItem.showSubMenu();//메뉴출력
+		
+		String name, phoneNumber, major, companyName, grade;
+		PhoneInfo store = null;//true false 확인용
+		try {
+			choice = scan.nextInt();
+		}
+		catch(InputMismatchException e) {
+			System.out.println("숫자를 입력.");
+			choice = 0;
+		}			
+		catch(Exception e) 
+		{
+			System.out.println("오류발생");	
+		}		
+		
+		scan.nextLine();
+		if(choice==SubMenuItem.NORMAL) {	//일반 입력 후 추가
+			System.out.print("이름:");name = scan.nextLine();
+			System.out.print("전화번호:");phoneNumber = scan.nextLine();
+			store=new PhoneInfo(name,phoneNumber);
+			System.out.println("======입력완료=======");
+		}
+
+		else if(choice==SubMenuItem.SCHOOL) { //동창 입력 후 추가
+			System.out.print("이름:");name = scan.nextLine();
+			System.out.print("전화번호:");phoneNumber = scan.nextLine();
+			System.out.print("전공:"); major = scan.nextLine();
+			System.out.print("학년:"); grade = scan.nextLine();
+			PhoneSchoolInfo storeSc=new PhoneSchoolInfo(name, phoneNumber, major, grade);
+			store=storeSc;
+			System.out.println("======입력완료=======");
 			
+		}
+		else if(choice==SubMenuItem.COMPANY) { //직장인 입력 후 추가
+			System.out.print("이름:");name = scan.nextLine();
+			System.out.print("전화번호:");phoneNumber = scan.nextLine();
+			System.out.print("회사:"); companyName = scan.nextLine();
+			PhoneCompanyInfo storeCo=new PhoneCompanyInfo(name, phoneNumber, companyName);
+			store=storeCo;
+			System.out.println("======입력완료=======");
+		}
+		else System.out.println("잘못입력하셨습니다.");
+		
+					
 			//덮어쓰기
-			if(set.add(store) == false){
-				System.out.println("덮어쓸까요? Y(y)/N(n)");
-				String re = scan.nextLine();
-	
-				if(re.equals("Y")||re.equals("y")) // 
-				{	
-					Iterator itr = set.iterator();
-					while(itr.hasNext()) {
-						PhoneInfo saname = (PhoneInfo)itr.next();
-						
-						if(saname.name.equals(store.name))
-						{
-							set.remove(saname);
-							set.add(store);
-							System.out.println("====덮어쓰기 성공====");
-						}
-						else {
-							System.out.println("====덮어쓰기 실패====");
-						}
+		if(set.add(store) == false){
+			System.out.println("덮어쓸까요? Y(y)/N(n)");
+			
+			String re = scan.nextLine();
+		
+			if(re.equals("Y")||re.equals("y"))
+			{	
+				Iterator itr = set.iterator();
+				while(itr.hasNext()) {
+					PhoneInfo saname = (PhoneInfo)itr.next();
+					
+					if(saname.name.equals(store.name))
+					{
+						set.remove(saname);
+						set.add(store);
+						System.out.println("====덮어쓰기 성공====");
+					
+					}
+					else {
+						System.out.println("====덮어쓰기 실패====");
+					
 					}
 				}
-				else if (re.equals("N")||re.equals("n")) {
-					System.out.println("====덮어쓰기를 취소합니다====");
-				}
-				else {
-					System.out.println("잘못입력하셨습니다.");
-				}
 			}
-		}
-		catch(Exception e){
-			System.out.println("오류발생");			
+			else if (re.equals("N")||re.equals("n")) {
+				System.out.println("====덮어쓰기를 취소합니다====");
+			}
+			else {
+				System.out.println("잘못입력하셨습니다.");			
+			}
 		}
 	}
 
@@ -145,54 +149,5 @@ public class PhoneBookManager{
 			System.out.println("");
 		}
 		System.out.println("==전체정보가 출력되었습니다==");
-	}
-	
-	public static void main(String[] args) throws MenuSelectException
-	{		
-
-		
-		//기능을 담당하는 핸들러 클래스의 객체 생성
-		//초기값으로 100명의 정보를 저장할수 있는 Friend타입의 객체배열 생성
-		//무한루프 조건으로 특정 입력에만 종료할수 있는 구조를 만들어준다.
-		PhoneBookManager manager = new PhoneBookManager();
-		while(true) {
-			MenuItem.printMenu();
-			try 
-			{	
-			Scanner scan = new Scanner(System.in);
-			int choice = scan.nextInt();
-			if(choice>5 || choice<1) {
-				MenuSelectException ex = new MenuSelectException();
-				throw ex;
-			}
-			
-				switch(choice) 
-				{
-				case MenuItem.DATAINPUT:
-					manager.dataInput();
-					break;//break문을 만나면 switch문을 탈출한다. 
-				case MenuItem.DATASEARCH:
-					manager.dataSearch();
-					break;
-				case MenuItem.DATADELETE:
-					//System.out.println("간략정보출력");
-					manager.dataDelete();
-					break;
-				case MenuItem.DATAALLSHOW:
-					//System.out.println("전체정보출력");
-					manager.dataAllShow();
-					break;
-				case 5:
-					System.out.println("프로그램을종료합니다.");
-					return;//main메서드의 종료이므로 프로그램 자체의 종료로 이어진다.
-				}
-			}
-			catch(InputMismatchException e) {
-					System.out.println("숫자를 입력하시오.");
-			}			
-			catch(Exception e) {
-				
-			}
-		}////while끝
 	}
 }
