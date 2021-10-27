@@ -36,7 +36,7 @@ public class PhoneBookManager{
 				System.out.print("이름:");name = scan.nextLine();
 				System.out.print("전화번호:");phoneNumber = scan.nextLine();
 				store=new PhoneInfo(name,phoneNumber);
-				System.out.println("입력완료!");
+				System.out.println("======입력완료=======");
 			}
 			else if(choice==SubMenuItem.SCHOOL) { //동창 입력 후 추가
 				System.out.print("이름:");name = scan.nextLine();
@@ -45,7 +45,7 @@ public class PhoneBookManager{
 				System.out.print("학년:"); grade = scan.nextInt();
 				PhoneSchoolInfo storeSc=new PhoneSchoolInfo(name, phoneNumber, major, grade);
 				store=storeSc;
-				System.out.println("입력완료!");
+				System.out.println("======입력완료=======");
 				
 			}
 			else if(choice==SubMenuItem.COMPANY) { //직장인 입력 후 추가
@@ -54,7 +54,7 @@ public class PhoneBookManager{
 				System.out.print("회사:"); companyName = scan.nextLine();
 				PhoneCompanyInfo storeCo=new PhoneCompanyInfo(name, phoneNumber, companyName);
 				store=storeCo;
-				System.out.println("입력완료!");
+				System.out.println("======입력완료=======");
 			}	
 			
 			//덮어쓰기
@@ -72,15 +72,15 @@ public class PhoneBookManager{
 						{
 							set.remove(saname);
 							set.add(store);
-							System.out.println("덮어쓰기 성공!");
+							System.out.println("====덮어쓰기 성공====");
 						}
 						else {
-							System.out.println("덮어쓰기 실패!");
+							System.out.println("====덮어쓰기 실패====");
 						}
 					}
 				}
 				else if (re.equals("N")||re.equals("n")) {
-					System.out.println("덮어쓰기를 취소합니다.");
+					System.out.println("====덮어쓰기를 취소합니다====");
 				}
 				else {
 					System.out.println("잘못입력하셨습니다.");
