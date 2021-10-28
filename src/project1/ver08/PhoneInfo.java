@@ -1,10 +1,11 @@
 package project1.ver08;
 
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.Scanner;
 
 
-public class PhoneInfo {
+public class PhoneInfo implements Serializable {
 	String name; //이름
 	String phoneNumber; //전화번호
 

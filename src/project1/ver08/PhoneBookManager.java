@@ -10,22 +10,32 @@ import java.util.Iterator;
 import java.util.Scanner;
 
 
+
 public class PhoneBookManager extends Exception{
-	
-	
 	HashSet<PhoneInfo> set = new HashSet<PhoneInfo>();
 	Scanner scan = new Scanner(System.in);
+	PhoneBookManager manager;
+	
+	public void readBookManager() //정보를 불러오는 메소드
+	{
+		readPhoneInfo();	
+	}
 	
 	
 	public void dataInput() { //데이터 입력
+
 		
 		int choice=0;
 		
+		
 		System.out.println("데이터입력을 시작합니다.");
-		SubMenuItem.showSubMenu();//메뉴출력
+		
+		SubMenuItem.showSubMenu();//일반,동창,회사 메뉴출력
 		
 		String name, phoneNumber, major, companyName, grade;
+		
 		PhoneInfo store = null;//true false 확인용
+		
 		try {
 			choice = scan.nextInt();
 		}
@@ -67,7 +77,7 @@ public class PhoneBookManager extends Exception{
 		else System.out.println("잘못입력하셨습니다.");
 		
 					
-			//덮어쓰기
+		//덮어쓰기
 		if(set.add(store) == false){
 			System.out.println("이미 저장된 데이터입니다.\n"
 					+ "덮어쓸까요? Y(y) / N(n)");
@@ -76,22 +86,19 @@ public class PhoneBookManager extends Exception{
 		
 			if(re.equals("Y")||re.equals("y"))
 			{	
-				if(set.contains(store))
-				{
-					set.remove(store);
-					set.add(store);
-					System.out.println("====덮어쓰기 성공====");
-				}
-				else 
-				{
-					System.out.println("====덮어쓰기 실패====");
-				}
+				set.remove(store);
+				set.add(store);
+				System.out.println("====덮어쓰기 성공====");
+				
 			}
+			
 			else if (re.equals("N")||re.equals("n")) {
 				System.out.println("====덮어쓰기를 취소합니다====");
 			}
-			else {
-				System.out.println("잘못입력하셨습니다.");			
+			
+			else 
+			{
+				System.out.println("====덮어쓰기 실패====");
 			}
 		}
 	}
@@ -118,7 +125,7 @@ public class PhoneBookManager extends Exception{
 
 		if(isFind==false) System.out.println("데이터 검색에 실패하였습니다.");
 		
-	}////end of searchInfo
+	}////end of dataSearch
 	
 	public void dataDelete() { //데이터 삭제
 		Scanner scan = new Scanner(System.in);
@@ -141,7 +148,7 @@ public class PhoneBookManager extends Exception{
 
 		if(isFind==false) System.out.println("삭제실패");
 		
-	}////end of deleteInfo	
+	}////end of dataDelete	
 	
 	public void dataAllShow() { //주소록전체출력
 		for(PhoneInfo info : set) {
@@ -149,27 +156,80 @@ public class PhoneBookManager extends Exception{
 			System.out.println("");
 		}
 		System.out.println("==전체정보가 출력되었습니다==");
-	}
+	}//전체출력끝
 	
-	public void saveFriendInfo() {		
+	//파일저장
+	public void savePhoneInfo() {	
+		
+		Iterator<PhoneInfo> itr = set.iterator();
+		
 		try {
 			//인스턴스를 파일에 저장하기 위해 출력스트림을 생성한다. 
 			ObjectOutputStream out =
 				new ObjectOutputStream(
-					new FileOutputStream("src/ex20io/PhoneBook.obj")
+					new FileOutputStream("src/project1/ver08/PhoneBook.obj")
 				);
-			Iterator<PhoneInfo> itr = set.iterator();//객체생성
-			while(itr.hasNext()) {	
+			
+			while(itr.hasNext()) {
 				PhoneInfo info = itr.next();
 				out.writeObject(info);
-				
 			}
-			
 		}
 		catch (Exception e) {
-			System.out.println("친구 정보 직렬화시 예외발생");
+			System.out.println("정보 직렬화시 예외발생");
+			e.printStackTrace();
+		}
+	}
+	
+	//파일복구
+	public void readPhoneInfo() {
+		try {
+			ObjectInputStream in =
+				new ObjectInputStream(
+					new FileInputStream("src/project1/ver08/PhoneBook.obj")
+				);
+			
+			while(true) {
+				PhoneInfo info = (PhoneInfo) in.readObject();
+				set.add(info);
+				if(info==null) break;
+			}
+		}
+		catch (Exception e) {
+			System.out.println("더 이상 읽을 객체가 없습니다.");
+		}
+		System.out.println("친구 정보가 복원되었습니다.");
+	}
+	
+	//자동저장옵션
+	public void autoSave(AutoSave au) {
+		
+		Scanner scan = new Scanner(System.in);
+		System.out.println("1.자동저장 활성화, 2.자동저장 종료");
+		int save = scan.nextInt();
+		
+		if(save==1) {
+			if(!au.isAlive()) {
+				au.setDaemon(true);
+				au.start();
+				System.out.println("자동저장을 시작합니다.");
+			}
+			else {
+				System.out.println("자동저장이 실행중입니다.");
+			}	
+		}
+		else if(save==2) {
+			if(au.isAlive()) {
+				au.interrupt();
+				System.out.println("자동저장 종료");
+			}
+		}
+		else {
+			System.out.println("메뉴를 잘못입력하셨습니다.");
 		}
 	}
 	
 }
+
+
 

@@ -1,7 +1,7 @@
 package project1.ver08;
 
 public interface MenuItem {
-	int DATAINPUT = 1, DATASEARCH =2, DATADELETE = 3, DATAALLSHOW=4, DATASAVE=5, END=6;
+	int DATAINPUT = 1, DATASEARCH =2, DATADELETE = 3, DATAALLSHOW=4, SAVEOPTION=5, END=6;
 	public static void printMenu() {
 		System.out.println("=====메뉴선택=====");
 		System.out.print("1. 데이터 입력 ");
