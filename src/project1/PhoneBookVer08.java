@@ -39,11 +39,11 @@ public class PhoneBookVer08 {
 					break;
 					
 				case MenuItem.SAVEOPTION:
-					if(!au.isAlive()) {
+					if(!au.isAlive()) { //쓰레드가 죽어있으면 새로 선언하기
 						au = new AutoSave(manager);
 						manager.autoSave(au);
 					}
-					else if(au.isAlive()){
+					else if(au.isAlive()){ //살아있으면 그냥 있는거
 						manager.autoSave(au);
 					}
 					break;
