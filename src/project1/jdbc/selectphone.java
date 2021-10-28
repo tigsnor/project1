@@ -18,7 +18,7 @@ public class selectphone extends pConnectjdbc
 			//2.쿼리작성
 			String sql = "SELECT pname, "
 				+ " pnum, "
-				+ " to_char(pbirth,'yyyy-mm-dd')"
+				+ " pbirth "
 				+ " FROM phonebook_tb WHERE 1=1";
 
 			String searchStr = scanValue("검색할이름");
@@ -40,13 +40,13 @@ public class selectphone extends pConnectjdbc
 				sql = sql + " AND p_code='"+ searchCode +"' ";
 			}*/
 			
-			sql = sql + " ORDER BY g_idx DESC";
+			sql = sql + " ORDER BY pnum DESC ";
 			
 			//3.쿼리실행
 			rs = stmt.executeQuery(sql);		
 			
 			//4.ResultSet의 갯수만큼 반복하며 출력
-			System.out.println("이름  번호  생년월일");
+			System.out.println(" 이름      번호       생년월일");
 			while(rs.next()){
 				String pname = rs.getString("pname");
 				String pnum = rs.getString("pnum");

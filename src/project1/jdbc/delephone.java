@@ -18,11 +18,18 @@ public class delephone extends pConnectjdbc{
 				int menu = scanner.nextInt();
 				if(menu==1) {
 					String sql = "UPDATE phonebook_tb "
-							+ " SET pname=?, pnum=? pbirth=?";
-					psmt = con.prepareStatement(sql);			
-					psmt.setString(1, scanValue("이름"));
-					psmt.setString(2, scanValue("전화번호"));
-					psmt.setString(3, scanValue("생년월일"));
+							+ " SET pnum=? , pbirth=? ";
+					String searchStr = scanValue("검색할이름");
+					if(searchStr!=null) {
+						sql = sql + " WHERE pname "
+								+ " = '%"+ searchStr +"%' ";
+					}
+				
+					psmt = con.prepareStatement(sql);	
+					
+					
+					psmt.setString(1, scanValue("전화번호"));
+					psmt.setString(2, scanValue("생년월일"));
 					int affected = psmt.executeUpdate();
 					System.out.println(affected +"행이 수정 되었습니다.");
 				}

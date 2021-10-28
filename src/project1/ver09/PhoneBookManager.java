@@ -1,5 +1,8 @@
 package project1.ver09;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 
@@ -115,6 +118,26 @@ public class PhoneBookManager {
 			inPhone[i].showPhoneInfo();
 		}
 		System.out.println("==전체정보가 출력되었습니다==");
+	}
+	
+	public void connect() {
+		try {
+			Class.forName("oracle.jdbc.OracleDriver");
+			Connection con = DriverManager.getConnection(
+					"jdbc:oracle:thin://@localhost:1521:xe", "kosmo", "1234");
+			System.out.println("DB 연결 성공");
+		}
+		catch (ClassNotFoundException e) {
+			System.out.println("오라클 드라이버 로딩 실패");
+			e.printStackTrace();
+		}
+		catch (SQLException e) {
+			System.out.println("DB 연결 실패");
+			e.printStackTrace();
+		}
+		catch (Exception e) {
+			System.out.println("알 수 없는 예외발생");
+		}
 	}
 	
 	public static void main(String[] args)

@@ -16,11 +16,8 @@ public class insertphone extends pConnectjdbc{
 	@Override
 	public void execute() {
 		//1.쿼리문작성
-		String sql = "INSERT INTO PONEBOOK_TB VALUES "
+		String sql = "INSERT INTO phonebook_tb VALUES "
 				+ "(?, ?, ?)";
-		
-//		String sql2 = "INSERT INTO sh_goods (g_idx, goods_name, goods_price, p_code) VALUES "
-//				+ "(seq_total_idx.NEXTVAL, ?, ?, ?)";
 		
 		try {
 			//2.prepared 객체 생성
