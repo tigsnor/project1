@@ -147,8 +147,15 @@ public class PhoneBookManager {
 		
 		////JDBC삭제
 		try {
-			String sql = "DELETE FROM phonebook_tb WHERE pname=?";
-			psmt = con.prepareStatement(sql);			
+			stmt = con.createStatement();
+//			String sre = " ALTER SEQUENCE seq_phonebook INCREMENT BY -1";
+//			String sins = " select seq_phonebook.nextval from dual";
+//			String sin = " ALTER SEQUENCE seq_phonebook INCREMENT BY 1";
+			String sql = " DELETE FROM phonebook_tb WHERE pname=?";
+			psmt = con.prepareStatement(sql);	
+//			rs = stmt.executeQuery(sins);	
+//			rs = stmt.executeQuery(sre);
+//			rs = stmt.executeQuery(sin);
 			psmt.setString(1, deleteName); 
 			psmt.executeUpdate();//업데이트
 			
