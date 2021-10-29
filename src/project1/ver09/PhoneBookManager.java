@@ -74,7 +74,7 @@ public class PhoneBookManager {
 			stmt = con.createStatement();
 			//쿼리문(SQL) 작성
 			String sql = "INSERT INTO phonebook_tb VALUES "
-					+ " (?, ?, ?)";
+					+ " (seq_phonebook.nextval, ?, ?, ?)";
 			//쿼리문 실행 및 결과값 반환
 			psmt = con.prepareStatement(sql);
 			
@@ -110,7 +110,7 @@ public class PhoneBookManager {
 			//Statement 객체 생성을 위한 메서드 호출
 			stmt = con.createStatement();
 			
-			String sql = " SELECT pname, pnum, pbirth "
+			String sql = " SELECT num, pname, pnum, pbirth "
 					+ " FROM phonebook_tb WHERE 1=1 ";
 						
 			if(searchName!=null) {
@@ -123,14 +123,15 @@ public class PhoneBookManager {
 			//2. SELECT 구문을 수행할 때 사용되는 함수입니다
 			rs = stmt.executeQuery(sql);
 			
-			System.out.println(" 이름     전화번호      생년월일");
+			System.out.println("번호 이름     전화번호      생년월일");
 			while(rs.next()){
+				Number num = rs.getInt("num");
 				String pname = rs.getString("pname");
 				String pnum = rs.getString("pnum");
 				Date pbirth = rs.getDate("pbirth");
 				
-				System.out.printf("%-3s %8s %8s\n\n", 
-						pname, pnum, pbirth);
+				System.out.printf("%2d %3s %8s %8s\n\n", 
+						num, pname, pnum, pbirth);
 			}
 		}
 		catch (Exception e) {
@@ -163,19 +164,20 @@ public class PhoneBookManager {
 		try {
 			stmt = con.createStatement();
 			
-			String sql = " SELECT pname, pnum, pbirth "
+			String sql = " SELECT num, pname, pnum, pbirth "
 					+ " FROM phonebook_tb ";
 			//쿼리실행
 			rs = stmt.executeQuery(sql);
 			
-			System.out.println(" 이름     전화번호      생년월일");
+			System.out.println("번호 이름     전화번호      생년월일");
 			while(rs.next()){
+				Number num = rs.getInt("num");
 				String pname = rs.getString("pname");
 				String pnum = rs.getString("pnum");
 				Date pbirth = rs.getDate("pbirth");
 				
-				System.out.printf("%-3s %8s %8s\n", 
-						pname, pnum, pbirth);
+				System.out.printf("%2d %3s %8s %8s\n", 
+						num, pname, pnum, pbirth);
 			}
 		}
 		catch (Exception e) {
