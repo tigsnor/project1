@@ -28,7 +28,7 @@ public class PhoneBookManager extends Exception{
 		int choice=0;
 		
 		
-		System.out.println("데이터입력을 시작합니다.");
+		System.out.println("===데이터입력을 시작합니다===");
 		
 		SubMenuItem.showSubMenu();//일반,동창,회사 메뉴출력
 		
@@ -53,7 +53,7 @@ public class PhoneBookManager extends Exception{
 			System.out.print("이름:");name = scan.nextLine();
 			System.out.print("전화번호:");phoneNumber = scan.nextLine();
 			store=new PhoneInfo(name,phoneNumber);
-			System.out.println("======입력완료=======");
+			System.out.println("=======입력완료========");
 		}
 
 		else if(choice==SubMenuItem.SCHOOL) { //동창 입력 후 추가
@@ -63,7 +63,7 @@ public class PhoneBookManager extends Exception{
 			System.out.print("학년:"); grade = scan.nextLine();
 			PhoneSchoolInfo storeSc=new PhoneSchoolInfo(name, phoneNumber, major, grade);
 			store=storeSc;
-			System.out.println("======입력완료=======");
+			System.out.println("=======입력완료========");
 			
 		}
 		else if(choice==SubMenuItem.COMPANY) { //직장인 입력 후 추가
@@ -72,7 +72,7 @@ public class PhoneBookManager extends Exception{
 			System.out.print("회사:"); companyName = scan.nextLine();
 			PhoneCompanyInfo storeCo=new PhoneCompanyInfo(name, phoneNumber, companyName);
 			store=storeCo;
-			System.out.println("======입력완료=======");
+			System.out.println("========입력완료.=========");
 		}
 		else System.out.println("잘못입력하셨습니다.");
 		
@@ -88,7 +88,7 @@ public class PhoneBookManager extends Exception{
 			{	
 				set.remove(store);
 				set.add(store);
-				System.out.println("====덮어쓰기 성공====");
+				System.out.println("=======덮어쓰기 성공=======");
 				
 			}
 			
@@ -98,7 +98,7 @@ public class PhoneBookManager extends Exception{
 			
 			else 
 			{
-				System.out.println("====덮어쓰기 실패====");
+				System.out.println("=======덮어쓰기 실패=======");
 			}
 		}
 	}
@@ -106,7 +106,7 @@ public class PhoneBookManager extends Exception{
 	
 	public void dataSearch() { //데이터 검색
 		Scanner scan = new Scanner(System.in);
-		System.out.println("데이터 검색을 시작합니다..");
+		System.out.println("====데이터 검색을 시작합니다====");
 		System.out.print("이름:");
 		String searchName = scan.nextLine();
 		
@@ -123,13 +123,13 @@ public class PhoneBookManager extends Exception{
 			}			
 		}
 
-		if(isFind==false) System.out.println("데이터 검색에 실패하였습니다.");
+		if(isFind==false) System.out.println("===데이터 검색에 실패하였습니다===");
 		
 	}////end of dataSearch
 	
 	public void dataDelete() { //데이터 삭제
 		Scanner scan = new Scanner(System.in);
-		System.out.println("데이터 삭제를 시작합니다..");
+		System.out.println("===데이터 삭제를 시작합니다===");
 		System.out.print("이름:");
 		String deletename = scan.nextLine();
 		
@@ -146,7 +146,7 @@ public class PhoneBookManager extends Exception{
 			}			
 		}
 
-		if(isFind==false) System.out.println("삭제실패");
+		if(isFind==false) System.out.println("========삭제실패=======");
 		
 	}////end of dataDelete	
 	
@@ -155,7 +155,7 @@ public class PhoneBookManager extends Exception{
 			info.showPhoneInfo();
 			System.out.println("");
 		}
-		System.out.println("==전체정보가 출력되었습니다==");
+		System.out.println("===전체정보가 출력되었습니다===");
 	}//전체출력끝
 	
 	//파일저장

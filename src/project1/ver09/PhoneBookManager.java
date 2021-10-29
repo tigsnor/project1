@@ -27,8 +27,6 @@ public class PhoneBookManager {
 
 	}
 	
-	
-	
 	/////////////////////////////////////////////////JDBC연결
 	
 	
@@ -149,7 +147,7 @@ public class PhoneBookManager {
 			psmt = con.prepareStatement(sql);			
 			psmt.setString(1, deleteName); 
 			int affected = psmt.executeUpdate();
-			System.out.println(affected +"행이 삭제 되었습니다.");
+			System.out.println(deleteName +"행이 삭제 되었습니다.");
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -158,7 +156,7 @@ public class PhoneBookManager {
 	
 
 	
-	public void close() {
+	public void close() {//자원반납
 		try {
 			if(stmt!=null) stmt.close();  
 			if(con!=null) con.close(); 
