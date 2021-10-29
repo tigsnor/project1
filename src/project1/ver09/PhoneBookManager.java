@@ -17,7 +17,7 @@ public class PhoneBookManager {
 		
 	Scanner scan = new Scanner(System.in);
 	
-	//sql접근
+	//jdbc객체
 	Connection con;
 	Statement stmt;
 	ResultSet rs;
@@ -53,12 +53,12 @@ public class PhoneBookManager {
 	////////////////////////////////////////////////JDBC연결
 	
 	public static void printMenu() { //메뉴 출력
-		System.out.println("선택하세요(JDBC)");
+		System.out.println("=======선택하세요(JDBC)=======");
 		System.out.print("1. 데이터 입력 ");
 		System.out.println("2. 데이터 검색 ");
 		System.out.print("3. 데이터 삭제 ");
-		System.out.println("4. 프로그램 종료");
-
+		System.out.println("4. 전체 데이터 출력");
+		System.out.println("5. 프로그램 종료");
 	}
 	
 	public void dataInput(){ ////데이터 입력
@@ -82,13 +82,13 @@ public class PhoneBookManager {
 			psmt.setString(1, name);//이름
 			psmt.setString(2, phoneNumber);//번호
 			psmt.setString(3, birthday);//생년월일
+			psmt.executeUpdate();//업데이트
 			
-			int row = psmt.executeUpdate();
 			//insert문에 대한 결과 출력
 			System.out.println("입력이 완료되었습니다.");
 		}
 		catch(SQLIntegrityConstraintViolationException e) {
-			System.out.println("동일한 데이터가 있습니다.");
+			System.out.println("제약조건에 위배됩니다.");
 		}
 		catch(SQLDataException e)
 		{
@@ -107,6 +107,7 @@ public class PhoneBookManager {
 		
 		//jdbc검색
 		try {
+			//Statement 객체 생성을 위한 메서드 호출
 			stmt = con.createStatement();
 			
 			String sql = " SELECT pname, pnum, pbirth "
@@ -118,6 +119,8 @@ public class PhoneBookManager {
 			}
 
 			//쿼리실행
+			//1. 수행결과로 ResultSet 객체의 값을 반환합니다.
+			//2. SELECT 구문을 수행할 때 사용되는 함수입니다
 			rs = stmt.executeQuery(sql);
 			
 			System.out.println(" 이름     전화번호      생년월일");
@@ -126,7 +129,7 @@ public class PhoneBookManager {
 				String pnum = rs.getString("pnum");
 				Date pbirth = rs.getDate("pbirth");
 				
-				System.out.printf("%2s %8s %8s\n", 
+				System.out.printf("%-3s %8s %8s\n\n", 
 						pname, pnum, pbirth);
 			}
 		}
@@ -146,13 +149,39 @@ public class PhoneBookManager {
 			String sql = "DELETE FROM phonebook_tb WHERE pname=?";
 			psmt = con.prepareStatement(sql);			
 			psmt.setString(1, deleteName); 
-			int affected = psmt.executeUpdate();
+			psmt.executeUpdate();//업데이트
+			
 			System.out.println(deleteName +"행이 삭제 되었습니다.");
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
 	}////end of deleteInfo	
+	
+	public void dataShow() {
+		System.out.println("전체정보출력");
+		try {
+			stmt = con.createStatement();
+			
+			String sql = " SELECT pname, pnum, pbirth "
+					+ " FROM phonebook_tb ";
+			//쿼리실행
+			rs = stmt.executeQuery(sql);
+			
+			System.out.println(" 이름     전화번호      생년월일");
+			while(rs.next()){
+				String pname = rs.getString("pname");
+				String pnum = rs.getString("pnum");
+				Date pbirth = rs.getDate("pbirth");
+				
+				System.out.printf("%-3s %8s %8s\n", 
+						pname, pnum, pbirth);
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 
 	

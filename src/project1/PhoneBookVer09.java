@@ -32,6 +32,9 @@ public class PhoneBookVer09 {
 				manager.dataDelete();
 				break;
 			case 4:
+				manager.dataShow();
+				break;
+			case 5:
 				System.out.println("프로그램을종료합니다.");
 				manager.close();//프로그램을 종료할때 자원반납
 				return;
