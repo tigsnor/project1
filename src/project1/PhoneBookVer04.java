@@ -3,6 +3,8 @@ package project1;
 import java.util.Scanner;
 
 import project1.ver02.PhoneInfo;
+import project1.ver05.PhoneBookManager;
+import project1.ver07.MenuItem;
 
 public class PhoneBookVer04 {
 
@@ -10,36 +12,34 @@ public class PhoneBookVer04 {
 
 		Scanner scan = new Scanner(System.in);
 		
-		while(true)
-		{
-			System.out.println("1.데이터 입력");
-			System.out.println("2.프로그램 종료");
-			System.out.print("선택:");
-			int menu = scan.nextInt();
-			scan.nextLine();
-			System.out.println();
+		//기능을 담당하는 핸들러 클래스의 객체 생성
+		//초기값으로 100명의 정보를 저장할수 있는 Friend타입의 객체배열 생성
+		PhoneBookManager manager = new PhoneBookManager(100);
+		//무한루프 조건으로 특정 입력에만 종료할수 있는 구조를 만들어준다.
+		while(true) {
+			manager.printMenu();
 			
-			if(menu==1) {
-				
-			System.out.print("이름:");
-			String name = scan.nextLine();
-			
-			System.out.print("전화번호:");
-			String phoneNumber = scan.nextLine();
-			
-			System.out.print("생년월일:");
-			String birthday = scan.nextLine();
-			System.out.println();
-			
-			PhoneInfo pi1 = new PhoneInfo (name, phoneNumber, birthday);
-			pi1.showPhoneInfo();
+			int choice = scan.nextInt();
+			switch(choice) 
+			{
+			case 1:
+				manager.dataInput();
+				break;//break문을 만나면 switch문을 탈출한다. 
+			case 2:
+				manager.dataSerch();
+				break;
+			case 3:
+				//System.out.println("간략정보출력");
+				manager.dataDelete();
+				break;
+			case 4:
+				//System.out.println("전체정보출력");
+				manager.dataAllShow();
+				break;
+			case 5:
+				System.out.println("프로그램을종료합니다.");
+				return;//main메서드의 종료이므로 프로그램 자체의 종료로 이어진다.
 			}
-			else if(menu==2) {
-			System.out.println("프로그램을 종료합니다.");
-			break;
-			}
-			else 
-			System.out.println("바른 번호를 입력하시오");
-		}
+		}////while 끝
 	}
 }
