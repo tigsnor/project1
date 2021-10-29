@@ -155,8 +155,13 @@ public class PhoneBookManager extends Exception{
 		for(PhoneInfo info : set) {
 			info.showPhoneInfo();
 			System.out.println("");
+			}
+		if(set.isEmpty()==true) {
+			System.out.println("출력할정보가없습니다.");
 		}
+		else {
 		System.out.println("===전체정보가 출력되었습니다===");
+		}
 	}//전체출력끝
 	
 	////////파일저장
