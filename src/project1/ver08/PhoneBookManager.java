@@ -21,8 +21,8 @@ public class PhoneBookManager extends Exception{
 		readPhoneInfo();	
 	}
 	
-	
-	public void dataInput() { //데이터 입력
+	///////데이터입력
+	public void dataInput() {
 
 		
 		int choice=0;
@@ -103,8 +103,8 @@ public class PhoneBookManager extends Exception{
 		}
 	}
 
-	
-	public void dataSearch() { //데이터 검색
+	///////데이터 검색
+	public void dataSearch() { 
 		Scanner scan = new Scanner(System.in);
 		System.out.println("====데이터 검색을 시작합니다====");
 		System.out.print("이름:");
@@ -127,7 +127,8 @@ public class PhoneBookManager extends Exception{
 		
 	}////end of dataSearch
 	
-	public void dataDelete() { //데이터 삭제
+	////////데이터삭제
+	public void dataDelete() { 
 		Scanner scan = new Scanner(System.in);
 		System.out.println("===데이터 삭제를 시작합니다===");
 		System.out.print("이름:");
@@ -158,7 +159,7 @@ public class PhoneBookManager extends Exception{
 		System.out.println("===전체정보가 출력되었습니다===");
 	}//전체출력끝
 	
-	//파일저장
+	////////파일저장
 	public void savePhoneInfo() {	
 		
 		Iterator<PhoneInfo> itr = set.iterator();
@@ -181,7 +182,7 @@ public class PhoneBookManager extends Exception{
 		}
 	}
 	
-	//파일복구
+	///////파일복구
 	public void readPhoneInfo() {
 		try {
 			ObjectInputStream in =
@@ -201,7 +202,7 @@ public class PhoneBookManager extends Exception{
 		System.out.println("친구 정보가 복원되었습니다.");
 	}
 	
-	//자동저장옵션
+	///////자동저장옵션
 	public void autoSave(AutoSave au) {
 		
 		Scanner scan = new Scanner(System.in);
