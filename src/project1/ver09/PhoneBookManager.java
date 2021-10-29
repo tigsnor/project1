@@ -190,6 +190,7 @@ public class PhoneBookManager {
 			if(stmt!=null) stmt.close();  
 			if(con!=null) con.close(); 
 			if(rs!=null) rs.close();
+			if(psmt!=null) psmt.close();
 			System.out.println("DB자원반납완료\n");
 		}
 		catch(SQLException e) {
