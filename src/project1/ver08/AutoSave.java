@@ -20,12 +20,11 @@ public class AutoSave extends Thread{
 			{
 				pn.savePhoneInfo();
 				sleep(5000);
-				System.out.println("자동저장성공");
+				System.out.println("\n자동저장성공");
 			}
 		}
 		catch (InterruptedException e) {
-			System.out.println("저장오류발생");
-			e.printStackTrace();
+
 		}
 		catch (Exception e) {}
 	}

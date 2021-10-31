@@ -226,8 +226,8 @@ public class PhoneBookManager extends Exception{
 		}
 		else if(save==2) {
 			if(au.isAlive()) {
-				au.interrupt();
 				System.out.println("자동저장 종료");
+				au.interrupt();
 			}
 		}
 		else {

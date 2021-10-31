@@ -9,7 +9,7 @@ public interface MenuItem {
 		System.out.print("3. 데이터 삭제");
 		System.out.println(" 4. 주소록 출력 ");
 		System.out.print("5. 저장옵션 ");
-		System.out.print(" 6. 프로그램 종료");
+		System.out.println(" 6. 프로그램 종료");
 
 	}
 }

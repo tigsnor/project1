@@ -123,14 +123,14 @@ public class PhoneBookManager {
 			//2. SELECT 구문을 수행할 때 사용되는 함수입니다
 			rs = stmt.executeQuery(sql);
 			
-			System.out.println("번호 이름     전화번호      생년월일");
+			System.out.println("번호 이름     전화번호   생년월일");
 			while(rs.next()){
 				Number num = rs.getInt("num");
 				String pname = rs.getString("pname");
 				String pnum = rs.getString("pnum");
 				Date pbirth = rs.getDate("pbirth");
 				
-				System.out.printf("%2d %3s %8s %8s\n\n", 
+				System.out.printf("%2d %3s %8s %6s\n\n", 
 						num, pname, pnum, pbirth);
 			}
 		}
@@ -147,15 +147,8 @@ public class PhoneBookManager {
 		
 		////JDBC삭제
 		try {
-			stmt = con.createStatement();
-//			String sre = " ALTER SEQUENCE seq_phonebook INCREMENT BY -1";
-//			String sins = " select seq_phonebook.nextval from dual";
-//			String sin = " ALTER SEQUENCE seq_phonebook INCREMENT BY 1";
 			String sql = " DELETE FROM phonebook_tb WHERE pname=?";
 			psmt = con.prepareStatement(sql);	
-//			rs = stmt.executeQuery(sins);	
-//			rs = stmt.executeQuery(sre);
-//			rs = stmt.executeQuery(sin);
 			psmt.setString(1, deleteName); 
 			psmt.executeUpdate();//업데이트
 			
@@ -176,7 +169,7 @@ public class PhoneBookManager {
 			//쿼리실행
 			rs = stmt.executeQuery(sql);
 			
-			System.out.println("번호 이름     전화번호      생년월일");
+			System.out.println("번호 이름     전화번호   생년월일");
 			while(rs.next()){
 				Number num = rs.getInt("num");
 				String pname = rs.getString("pname");
